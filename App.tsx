@@ -3,6 +3,7 @@ import React, { useState, useMemo, useEffect } from 'react';
 import type { InvoiceItem, ReceiverInfo } from './types';
 import InvoiceForm from './components/InvoiceForm';
 import InvoicePreview from './components/InvoicePreview';
+import ThemeToggle from './components/ThemeToggle';
 import { PrintIcon } from './components/icons';
 
 const App: React.FC = () => {
@@ -83,7 +84,7 @@ const App: React.FC = () => {
     const totalAmount = useMemo(() => {
         return items.reduce((sum, item) => sum + (item.amount || 0), 0);
     }, [items]);
-    
+
     const handlePrint = () => {
         // generate a new unique 6-digit suffix and update the invoice number before printing
         if (usedSuffixes.size >= 1000000) {
@@ -99,7 +100,7 @@ const App: React.FC = () => {
 
         const next = new Set(usedSuffixes);
         next.add(suffix);
-        try { localStorage.setItem('usedInvoiceSuffixes', JSON.stringify(Array.from(next))); } catch (e) {}
+        try { localStorage.setItem('usedInvoiceSuffixes', JSON.stringify(Array.from(next))); } catch (e) { }
         setUsedSuffixes(next);
 
         setInvoiceNumber(buildInvoice(suffix));
@@ -109,23 +110,26 @@ const App: React.FC = () => {
     };
 
     return (
-        <div className="min-h-screen bg-gray-50 text-gray-900 font-sans">
+        <div className="min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 font-sans transition-colors duration-200">
             <div className="container mx-auto p-4 md:p-8">
-                <header className="text-center mb-8">
-                    <h1 className="text-4xl font-bold text-emerald-700">Invoice Generator</h1>
-                    <p className="text-gray-600 mt-2">Create and print invoices for Global Village Academy</p>
+                <header className="text-center mb-8 relative">
+                    <div className="absolute right-0 top-0">
+                        <ThemeToggle />
+                    </div>
+                    <h1 className="text-4xl font-bold text-emerald-700 dark:text-emerald-500">Invoice Generator</h1>
+                    <p className="text-gray-600 dark:text-gray-400 mt-2">Create and print invoices for Global Village Academy</p>
                 </header>
 
                 <main className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
                     <div className="lg:sticky lg:top-8">
-                      <InvoiceForm
-                          receiver={receiver}
-                          setReceiver={setReceiver}
-                          paidBy={paidBy}
-                          setPaidBy={setPaidBy}
-                          items={items}
-                          setItems={setItems}
-                      />
+                        <InvoiceForm
+                            receiver={receiver}
+                            setReceiver={setReceiver}
+                            paidBy={paidBy}
+                            setPaidBy={setPaidBy}
+                            items={items}
+                            setItems={setItems}
+                        />
                     </div>
                     <div>
                         <InvoicePreview
@@ -139,8 +143,8 @@ const App: React.FC = () => {
                     </div>
                 </main>
             </div>
-            <div className="sticky bottom-0 left-0 right-0 p-4 bg-white/80 backdrop-blur-sm border-t border-gray-200 flex justify-center print:hidden">
-                 <button
+            <div className="sticky bottom-0 left-0 right-0 p-4 bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm border-t border-gray-200 dark:border-gray-700 flex justify-center print:hidden">
+                <button
                     onClick={handlePrint}
                     className="flex items-center justify-center gap-2 w-full max-w-md px-6 py-3 bg-emerald-600 text-white font-bold rounded-lg shadow-md hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 transition-transform transform hover:scale-105"
                 >

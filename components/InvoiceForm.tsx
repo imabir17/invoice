@@ -46,9 +46,9 @@ const InvoiceForm: React.FC<InvoiceFormProps> = ({
     };
 
     return (
-        <div className="p-8 space-y-8 bg-white rounded-lg shadow-sm">
+        <div className="p-8 space-y-8 bg-white dark:bg-gray-800 rounded-lg shadow-sm transition-colors duration-200">
             <div>
-                <h2 className="text-xl font-semibold text-gray-800 mb-4">Receiver Information</h2>
+                <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-4">Receiver Information</h2>
                 <div className="grid grid-cols-1 gap-4">
                     <input
                         type="text"
@@ -56,7 +56,7 @@ const InvoiceForm: React.FC<InvoiceFormProps> = ({
                         value={receiver.name}
                         onChange={handleReceiverChange}
                         placeholder="Receiver Name"
-                        className="w-full px-3 py-2 bg-white text-gray-900 border border-blue-500 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder:text-gray-400"
+                        className="w-full px-3 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 border border-blue-500 dark:border-blue-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder:text-gray-400 dark:placeholder:text-gray-500 transition-colors"
                     />
                     <input
                         type="text"
@@ -64,7 +64,7 @@ const InvoiceForm: React.FC<InvoiceFormProps> = ({
                         value={receiver.address}
                         onChange={handleReceiverChange}
                         placeholder="Receiver Address"
-                        className="w-full px-3 py-2 bg-white text-gray-900 border border-blue-500 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder:text-gray-400"
+                        className="w-full px-3 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 border border-blue-500 dark:border-blue-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder:text-gray-400 dark:placeholder:text-gray-500 transition-colors"
                     />
                     <input
                         type="text"
@@ -72,24 +72,24 @@ const InvoiceForm: React.FC<InvoiceFormProps> = ({
                         value={receiver.phone}
                         onChange={handleReceiverChange}
                         placeholder="Receiver Phone Number"
-                        className="w-full px-3 py-2 bg-white text-gray-900 border border-blue-500 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder:text-gray-400"
+                        className="w-full px-3 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 border border-blue-500 dark:border-blue-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder:text-gray-400 dark:placeholder:text-gray-500 transition-colors"
                     />
                 </div>
             </div>
 
             <div>
-                <h2 className="text-xl font-semibold text-gray-800 mb-4">Paid By</h2>
+                <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-4">Paid By</h2>
                 <input
                     type="text"
                     value={paidBy}
                     onChange={(e) => setPaidBy(e.target.value)}
                     placeholder="Payer's name (e.g., John Doe)"
-                    className="w-full px-3 py-2 bg-white text-gray-900 border border-blue-500 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder:text-gray-400"
+                    className="w-full px-3 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 border border-blue-500 dark:border-blue-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder:text-gray-400 dark:placeholder:text-gray-500 transition-colors"
                 />
             </div>
 
             <div>
-                <h2 className="text-xl font-semibold text-gray-800 mb-4">Invoice Items</h2>
+                <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-4">Invoice Items</h2>
                 <div className="space-y-4">
                     {items.map((item, index) => (
                         <div key={item.id} className="flex items-center space-x-2">
@@ -98,14 +98,14 @@ const InvoiceForm: React.FC<InvoiceFormProps> = ({
                                 value={item.description}
                                 onChange={(e) => handleItemChange(index, 'description', e.target.value)}
                                 placeholder="Description"
-                                className="w-full px-3 py-2 bg-white text-gray-900 border border-blue-500 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder:text-gray-400"
+                                className="w-full px-3 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 border border-blue-500 dark:border-blue-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder:text-gray-400 dark:placeholder:text-gray-500 transition-colors"
                             />
                             <input
                                 type="number"
                                 value={item.amount === 0 ? '' : item.amount}
                                 onChange={(e) => handleItemChange(index, 'amount', e.target.value)}
                                 placeholder="Amount"
-                                className="w-48 px-3 py-2 bg-white text-gray-900 border border-blue-500 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder:text-gray-400"
+                                className="w-48 px-3 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 border border-blue-500 dark:border-blue-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder:text-gray-400 dark:placeholder:text-gray-500 transition-colors"
                             />
                             <button
                                 onClick={() => removeItem(index)}
@@ -119,7 +119,7 @@ const InvoiceForm: React.FC<InvoiceFormProps> = ({
                 </div>
                 <button
                     onClick={addItem}
-                    className="mt-4 w-full px-4 py-2 bg-emerald-50 text-emerald-700 font-semibold rounded-md hover:bg-emerald-100 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500"
+                    className="mt-4 w-full px-4 py-2 bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 font-semibold rounded-md hover:bg-emerald-100 dark:hover:bg-emerald-900/50 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500"
                 >
                     + Add Item
                 </button>
